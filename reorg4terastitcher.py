@@ -40,8 +40,8 @@ width_pix = int(raw_input('Enter each image width in pixels:  '))
 height_pix = int(raw_input('Enter each image height in pixels:  '))
 pixOverlap = int(raw_input('Enter number of pixels overlap:  '))
 microns_per_pix = float(raw_input('Enter XY microns/pixel:  '))
-numSlice = int(raw_input('Enter number of slices:  '))
 z_move_microns = float(raw_input('Enter z-step in microns:  '))
+numSlice = int(raw_input('Enter number of slices:  '))
 
 # assume "backward S" scanning pattern, create tile orientation map
 tileOrientation = range(1,numRow * numCol + 1)
@@ -73,7 +73,7 @@ if os.path.exists(TeraStitcher_dir): # if this folder already exists, remove
 os.mkdir(TeraStitcher_dir)
 os.chdir(TeraStitcher_dir)
 
-stage_move_microns = (width_pix - pixOverlap) * microns_per_pix
+stage_move_microns = (width_pix - pixOverlap) * microns_per_pix # assume overlap in x and y are the same
 rowFolder = 0
 i = 0
 
@@ -88,11 +88,11 @@ for row in range(numRow):
         # move appropriate files and rename them
         dir_for_creating_folder = os.getcwd()
         folder_to_move_to = os.path.join(os.getcwd(),rowFolder_colFolder)
-        copy_and_rename_files_in_tile4terastitcher(tileOrientation[i],original_dir,folder_to_move_to,z_move_microns)
+        copy_and_rename_files_in_tile4terastitcher(tileOrientation[i],tileNumDigit,original_dir,folder_to_move_to,z_move_microns)
         i += 1
         os.chdir(dir_for_creating_folder)
         # continue making folder hierachy
-        colFolder = colFolder + int(round(z_move_microns,1)*10)
+        colFolder = colFolder + int(round(stage_move_microns,1)*10)
     rowFolder = rowFolder + int(round(stage_move_microns,1)*10)
     os.chdir(TeraStitcher_dir)
 
