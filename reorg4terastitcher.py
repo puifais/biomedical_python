@@ -4,7 +4,8 @@
 
     Input:  tiff files from Zeiss Lightsheet microscope. This script assume the
     "backward S" scanning pattern. Export your CZI file into TIFF files using
-    ZEN blue export. The filenames will be filename_v#z###.tif.
+    ZEN blue export. The filenames will be filename_v#z#.tif. The number of
+    digits after the character 'v' can vary. No problemo.
 
     Output:  Folders within folders with appropriate files moved and renamed,
     ready for TeraStitcher. The first level of folders represent rows of tiles.
@@ -47,14 +48,15 @@ tileOrientation = range(1,numRow * numCol + 1)
 for row in range(numRow):
     if row % 2 == 1: # only reverse tile orientation if in odd row. Remember row starts from 0 not 1
         tileOrientation[row * numCol:row * numCol + numCol] = tileOrientation[row * numCol + numCol - 1:row * numCol -1:-1]
+tileNumDigit = len(str(numRow * numCol))
 
-def copy_and_rename_files_in_tile4terastitcher(tileNum,original_dir,folder_to_move_to,z_move_microns):
+def copy_and_rename_files_in_tile4terastitcher(tileNum,tileNumDigit,original_dir,folder_to_move_to,z_move_microns):
     '''
     This function moves all the files in each tile into appropriate TeraStitcher
     folders and rename them according to their depth in z
     '''
     os.chdir(original_dir)
-    search_word = ('*v' + str(tileNum) + '*.tif*')
+    search_word = ('*v' + str(tileNum).zfill(tileNumDigit) + '*.tif*')
     files_in_tile = glob.glob(search_word)
     new_filename = 0
     for file in files_in_tile:
