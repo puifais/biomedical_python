@@ -26,7 +26,6 @@ import os, shutil, glob
 root = Tk.Tk()
 root.withdraw()
 original_dir = tkFileDialog.askdirectory() + '/'
-#original_dir = '/Users/puifai/Dropbox (Personal)/work/lightsheet/'
 # change current directory to where user selected
 os.chdir(os.path.dirname(original_dir))
 
@@ -63,12 +62,12 @@ def copy_and_rename_files_in_tile4terastitcher(tileNum,tileNumDigit,original_dir
         original_filefullpath = os.path.join(original_dir,file)
         new_filefullpath = os.path.join(folder_to_move_to,str(new_filename).zfill(6) +'.tif')
         shutil.copyfile(original_filefullpath,new_filefullpath)
-        #os.rename(original_filefullpath,new_filefullpath)
+        print('working on:  %s' %file)
         new_filename = new_filename + int(round(z_move_microns,1)*10)
 
 # create a new directory structure
 TeraStitcher_dir = os.path.dirname(original_dir) + '_TeraStitcher'
-if os.path.exists(TeraStitcher_dir): # if this folder already exists, remove
+if os.path.exists(TeraStitcher_dir): # if this folder already exists, remove it
     shutil.rmtree(TeraStitcher_dir)
 os.mkdir(TeraStitcher_dir)
 os.chdir(TeraStitcher_dir)
