@@ -133,7 +133,7 @@ for row in range(numRow):
 toc = timeit.default_timer()
 timelapse = toc - tic
 print('')
-print('%s files were reorganized in %s s' %(totalNumFileReorg, timelapse)
+print('%s files were reorganized in %s s' %(totalNumFileReorg, timelapse))
 
 
 # In[8]:
