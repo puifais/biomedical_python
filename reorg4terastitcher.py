@@ -69,7 +69,7 @@ def copy_and_rename_files_in_tile4terastitcher(tileNum,tileNumDigit,original_dir
     folders and rename them according to their depth in z
     '''
     os.chdir(original_dir)
-    search_word = ('*_v' + str(tileNum).zfill(tileNumDigit) + '*.tiff*')
+    search_word = ('*_v' + str(tileNum).zfill(tileNumDigit) + '*.tif*')
     files_in_tile = glob.glob(search_word)
     new_filename = 0
     numFileReorg = 0
