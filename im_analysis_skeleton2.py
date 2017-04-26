@@ -31,8 +31,7 @@ jv.start_vm(class_path=bf.JARS, max_heap_size='12G')
 
 root = Tk.Tk()
 root.withdraw() #hiding root alllows file diaglog GUI to be shown without any other GUI elements
-#file_full_path = tkFileDialog.askopenfilename()
-file_full_path = '/Users/puifai/Dropbox (Biophotonics)/Biophotonics Team Folder/Dropbox (Biophotonics - Puifai)/mixing_work_and_play/skeleton/Cell1.lsm'
+file_full_path = tkFileDialog.askopenfilename()
 filepath, filename = os.path.split(file_full_path)
 os.chdir(os.path.dirname(file_full_path))
 
